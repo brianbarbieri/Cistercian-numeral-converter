@@ -1,6 +1,7 @@
 import numpy as np
 from textwrap import wrap
 import matplotlib.pyplot as plt
+import argparse
 
 class Notations:
     """
@@ -73,7 +74,6 @@ class Number:
     def set_number(self, n):
         n = str(n)
         quads = wrap(n, 4)
-        print(quads)
         for quad in quads:
             for i, number in enumerate(quad):
                 if number != "0": # no notation for 0
@@ -90,7 +90,6 @@ class Number:
                         x, y = 40, 11 # assign right x and y pos
                         symb = np.fliplr(np.flipud(Notations.DICT[number])) + Notations._baser
 
-
                     # add number notation to number
                     self.number[x:x+Notations.NUMBER_HEIGHT,y:y+Notations.NUMBER_WIDTH] = symb
 
@@ -101,7 +100,12 @@ class Number:
         pass
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", help="The number that needs to be converted to a cistercian numeral")
+    args = parser.parse_args()
+
     n = Number()
-    n.set_number(1993)
+    n.set_number(args.n)
     n.show_number()
 
