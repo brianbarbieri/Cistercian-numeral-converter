@@ -1,6 +1,6 @@
 # Cistercian numeral converter
 
-The script in this repository converts an arabic numeral to a image showing its cistercian numeral. Repository inspired by the following video:
+The script in this repository converts an arabic numeral to a image showing its cistercian numeral. Repository inspired by the following video and the following webpage(http://www.davidaking.org/Ciphers.htm):
 
 <a href="https://www.youtube.com/watch?v=9p55Qgt7Ciw&ab_channel=Numberphile
 " target="_blank"><img src="http://img.youtube.com/vi/9p55Qgt7Ciw/0.jpg" 
