@@ -65,6 +65,7 @@ class Number:
     """
 
     def __init__(self):
+        self.n = 0
         self.number = Notations.TEMPLATE
 
     def show_number(self):
@@ -72,10 +73,10 @@ class Number:
         plt.show()
 
     def set_number(self, n):
-        n = str(n)
-        quads = wrap(n, 4)
+        self.n = str(n)
+        quads = wrap(self.n, 4)
         for quad in quads:
-            for i, number in enumerate(quad):
+            for i, number in enumerate(reversed(quad)):
                 if number != "0": # no notation for 0
                     if i == 0: # top right
                         x, y = 10, 20 # assign right x and y pos
@@ -97,12 +98,15 @@ class Number:
 
     def save_number(self):
         """Saves the converted number to a image file"""
-        pass
+        fig = plt.figure()
+        plt.imshow(self.number)
+        fig.savefig(f'{self.n}.png', dpi=fig.dpi)
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-n", help="The number that needs to be converted to a cistercian numeral")
+    parser.add_argument("-n", help="The number that needs to be converted to a cistercian numeral.", required=True)
+    parser.add_argument("-s", help="Saves the number as an image file.")
     args = parser.parse_args()
 
     n = Number()
