@@ -3,6 +3,9 @@ from textwrap import wrap
 import matplotlib.pyplot as plt
 import argparse
 
+plt.tick_params(top=False, bottom=False, left=False, right=False,
+                labelleft=False, labelbottom=False)
+
 class Notations:
     """
     Class with all the hardcoded notations to create cistercian numerals
@@ -106,10 +109,13 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", help="The number that needs to be converted to a cistercian numeral.", required=True)
-    parser.add_argument("-s", help="Saves the number as an image file.")
+    parser.add_argument("-s", help="Saves the number as an image file.", action='store_true')
     args = parser.parse_args()
 
     n = Number()
     n.set_number(args.n)
     n.show_number()
+    if args.s:
+        n.save_number()
+        print("File has been saved")
 
