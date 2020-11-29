@@ -69,7 +69,7 @@ class Number:
 
     def __init__(self):
         self.n = 0
-        self.number = Notations.TEMPLATE
+        self.number = np.zeros(shape=(60,40))
 
     def show_number(self):
         plt.imshow(self.number)
@@ -78,16 +78,18 @@ class Number:
     def set_number(self, n):
         self.n = str(n)
         quads = wrap(self.n, 4)
-        for quad in quads:
-            for i, number in enumerate(reversed(quad)):
+        self.number = np.zeros(shape=(60,40*len(quads)))
+        for i, quad in enumerate(quads):
+            new_number = Notations.TEMPLATE
+            for j, number in enumerate(reversed(quad)):
                 if number != "0": # no notation for 0
-                    if i == 0: # top right
+                    if j == 0: # top right
                         x, y = 10, 20 # assign right x and y pos
                         symb = Notations.DICT[number] + Notations._basel
-                    elif i == 1: # top left
+                    elif j == 1: # top left
                         x, y = 10, 11 # assign right x and y pos                     
                         symb = np.fliplr(Notations.DICT[number]) + Notations._baser
-                    elif i == 2: # bottom right
+                    elif j == 2: # bottom right
                         x, y = 40, 20 # assign right x and y pos
                         symb = np.flipud(Notations.DICT[number]) + Notations._basel
                     else: # bottom left
@@ -95,9 +97,10 @@ class Number:
                         symb = np.fliplr(np.flipud(Notations.DICT[number])) + Notations._baser
 
                     # add number notation to number
-                    self.number[x:x+Notations.NUMBER_HEIGHT,y:y+Notations.NUMBER_WIDTH] = symb
+                    new_number[x:x+Notations.NUMBER_HEIGHT,y:y+Notations.NUMBER_WIDTH] = symb
 
-            self.number[self.number > 255] = 255
+            new_number[new_number > 255] = 255
+            self.number[:,i*40:i*40+40] = new_number
 
     def save_number(self):
         """Saves the converted number to a image file"""
