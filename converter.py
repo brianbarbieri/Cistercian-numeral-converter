@@ -59,8 +59,6 @@ class Notations:
         "8" : EIGHT,
         "9" : NINE,
     }
-    for key in DICT:
-        DICT[key] = DICT[key] 
 
 class Number:
     """
